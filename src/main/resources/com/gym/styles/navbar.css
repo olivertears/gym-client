@@ -1,0 +1,7 @@
+.navBtn {
+    -fx-background-color: none;
+}
+
+.navBtn:hover {
+    -fx-background-color: rgba(255, 250, 170, 0.3);
+}

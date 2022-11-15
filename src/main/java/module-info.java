@@ -6,6 +6,10 @@ module com.gym {
 
     opens com.gym to javafx.fxml;
     exports com.gym;
-    exports com.gym.controller;
-    opens com.gym.controller to javafx.fxml;
+    exports com.gym.utils;
+    opens com.gym.utils to javafx.fxml;
+    exports com.gym.controller.templates;
+    opens com.gym.controller.templates to javafx.fxml;
+    exports com.gym.controller.pages;
+    opens com.gym.controller.pages to javafx.fxml;
 }
