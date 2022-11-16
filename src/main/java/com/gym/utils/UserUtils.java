@@ -4,6 +4,7 @@ import com.gym.Connection;
 import com.gym.command.ClientAction;
 import com.gym.dto.LoginDto;
 import com.gym.dto.SignupDto;
+import com.gym.entity.User;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -15,11 +16,11 @@ public class UserUtils {
         try {
             connection = new Connection(new Socket("127.0.0.1", 8000));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
-    public static boolean signupUser(String name, String surname, String email, String password) {
+    public static User signupUser(String name, String surname, String email, String password) {
         SignupDto signupDto = new SignupDto();
         signupDto.setName(name);
         signupDto.setSurname(surname);
@@ -29,10 +30,10 @@ public class UserUtils {
         ClientAction clientAction = ClientAction.SIGNUP;
         connection.writeObject(clientAction);
         connection.writeObject(signupDto);
-        return (boolean) connection.readObject();
+        return (User) connection.readObject();
     }
 
-    public static boolean loginUser(String email, String password) {
+    public static User loginUser(String email, String password) {
         LoginDto loginDto = new LoginDto();
         loginDto.setEmail(email);
         loginDto.setPassword(password);
@@ -40,6 +41,6 @@ public class UserUtils {
         ClientAction clientAction = ClientAction.LOGIN;
         connection.writeObject(clientAction);
         connection.writeObject(loginDto);
-        return (boolean) connection.readObject();
+        return (User) connection.readObject();
     }
 }

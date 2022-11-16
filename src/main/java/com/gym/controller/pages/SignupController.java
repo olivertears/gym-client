@@ -1,5 +1,6 @@
 package com.gym.controller.pages;
 
+import com.gym.entity.User;
 import com.gym.utils.CommonUtils;
 import com.gym.utils.UserUtils;
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class SignupController implements Initializable {
     @FXML
@@ -35,23 +37,31 @@ public class SignupController implements Initializable {
         iv_exit.setOnMouseClicked(event -> System.exit(0));
 
         btn_signup.setOnAction(event -> {
-                String name = tf_name.getText().trim();
-                String surname = tf_surname.getText().trim();
-                String email = tf_email.getText().trim();
-                String password = pf_password.getText();
-                if (name.isEmpty() || surname.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            String name = tf_name.getText().trim();
+            String surname = tf_surname.getText().trim();
+            String email = tf_email.getText().trim();
+            String password = pf_password.getText();
+
+            Pattern pattern = Pattern.compile("^([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$");
+
+            if (name.isEmpty() || surname.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Чтобы зарегистрироваться нужно заполнить все поля (:");
+                alert.show();
+            } else if (!pattern.matcher(email).find()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Неверный формат почты :0");
+                alert.show();
+            } else {
+                User user = UserUtils.signupUser(name, surname, email, password);
+                if (user == null) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("Чтобы зарегистрироваться нужно заполнить все поля (:");
+                    alert.setContentText("Пользователь с такой почтой уже существует :0");
                     alert.show();
                 } else {
-                    if (UserUtils.signupUser(name, surname, email, password)) {
-                        CommonUtils.changeScene(btn_signup,"components/templates/navbar.fxml");
-                    } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setContentText("Что-то пошло не так, пожалуйста попробуйте позже :0");
-                        alert.show();
-                    }
+                    CommonUtils.changeScene(btn_signup,"components/templates/navbar.fxml");
                 }
+            }
         });
 
         btn_link_login.setOnAction(event ->  CommonUtils.changeScene(btn_link_login,"components/pages/login.fxml"));

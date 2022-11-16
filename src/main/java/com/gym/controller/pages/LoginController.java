@@ -1,5 +1,6 @@
 package com.gym.controller.pages;
 
+import com.gym.entity.User;
 import com.gym.utils.CommonUtils;
 import com.gym.utils.UserUtils;
 import javafx.fxml.FXML;
@@ -38,12 +39,13 @@ public class LoginController implements Initializable {
                 alert.setContentText("Чтобы войти нужно заполнить все поля (:");
                 alert.show();
             } else {
-                if (UserUtils.loginUser(email, password)) {
-                    CommonUtils.changeScene(btn_login,"components/templates/navbar.fxml");
-                } else {
+                User user = UserUtils.loginUser(email, password);
+                if (user == null) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setContentText("Неверная почта или пароль :0");
                     alert.show();
+                } else {
+                    CommonUtils.changeScene(btn_login,"components/templates/navbar.fxml");
                 }
             }
         });
