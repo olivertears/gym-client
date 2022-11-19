@@ -1,5 +1,6 @@
 package com.gym.controller.pages;
 
+import com.gym.State;
 import com.gym.entity.User;
 import com.gym.utils.CommonUtils;
 import com.gym.utils.UserUtils;
@@ -53,12 +54,13 @@ public class SignupController implements Initializable {
                 alert.setContentText("Неверный формат почты :0");
                 alert.show();
             } else {
-                User user = UserUtils.signupUser(name, surname, email, password);
+                User user = UserUtils.signup(name, surname, email, password);
                 if (user == null) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setContentText("Пользователь с такой почтой уже существует :0");
                     alert.show();
                 } else {
+                    State.user = user;
                     CommonUtils.changeScene(btn_signup,"components/templates/navbar.fxml");
                 }
             }

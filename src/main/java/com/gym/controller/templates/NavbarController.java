@@ -1,6 +1,7 @@
 package com.gym.controller.templates;
 
 import com.gym.Application;
+import com.gym.State;
 import com.gym.utils.CommonUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,42 +34,34 @@ public class NavbarController implements Initializable {
         btn_logout.setOnMouseClicked(event -> CommonUtils.changeScene(btn_logout, "components/pages/login.fxml"));
 
         try {
+            setUser();
             home();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void setUser(String name, String surname) {
-        lbl_user.setText(name + " " + surname);
+    public void setUser() {
+        lbl_user.setText(State.user.getName() + " " + State.user.getSurname());
     }
+
     public void home () throws IOException {
-        Parent fxml = FXMLLoader.load(Objects.requireNonNull(Application.class.getResource("components/pages/home.fxml")));
-        wrap_navbar.getChildren().removeAll();
-        wrap_navbar.getChildren().setAll(fxml);
+        CommonUtils.changePage(wrap_navbar, "components/pages/home.fxml");
     }
 
     public void subscription () throws IOException {
-        Parent fxml = FXMLLoader.load(Objects.requireNonNull(Application.class.getResource("components/pages/subscription.fxml")));
-        wrap_navbar.getChildren().removeAll();
-        wrap_navbar.getChildren().setAll(fxml);
+        CommonUtils.changePage(wrap_navbar, "components/pages/subscription.fxml");
     }
 
     public void workout () throws IOException {
-        Parent fxml = FXMLLoader.load(Objects.requireNonNull(Application.class.getResource("components/pages/workout.fxml")));
-        wrap_navbar.getChildren().removeAll();
-        wrap_navbar.getChildren().setAll(fxml);
+        CommonUtils.changePage(wrap_navbar, "components/pages/workout.fxml");
     }
 
     public void budget () throws IOException {
-        Parent fxml = FXMLLoader.load(Objects.requireNonNull(Application.class.getResource("components/templates/budget.fxml")));
-        wrap_navbar.getChildren().removeAll();
-        wrap_navbar.getChildren().setAll(fxml);
+        CommonUtils.changePage(wrap_navbar, "components/templates/budget.fxml");
     }
 
     public void user () throws IOException {
-        Parent fxml = FXMLLoader.load(Objects.requireNonNull(Application.class.getResource("components/pages/user.fxml")));
-        wrap_navbar.getChildren().removeAll();
-        wrap_navbar.getChildren().setAll(fxml);
+        CommonUtils.changePage(wrap_navbar, "components/pages/user.fxml");
     }
 }

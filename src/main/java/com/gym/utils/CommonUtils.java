@@ -3,12 +3,15 @@ package com.gym.utils;
 import com.gym.Application;
 import com.gym.Connection;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Objects;
 
 public class CommonUtils {
     static Connection connection;
@@ -32,5 +35,11 @@ public class CommonUtils {
         }
         stage.setScene(scene);
         stage.show();
+    }
+
+    public static void changePage(VBox wrapper, String fxmlFile) throws IOException {
+        Parent fxml = FXMLLoader.load(Objects.requireNonNull(Application.class.getResource(fxmlFile)));
+        wrapper.getChildren().removeAll();
+        wrapper.getChildren().setAll(fxml);
     }
 }

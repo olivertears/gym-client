@@ -1,5 +1,7 @@
 package com.gym.controller.pages;
 
+import com.gym.State;
+import com.gym.controller.templates.NavbarController;
 import com.gym.entity.User;
 import com.gym.utils.CommonUtils;
 import com.gym.utils.UserUtils;
@@ -39,12 +41,13 @@ public class LoginController implements Initializable {
                 alert.setContentText("Чтобы войти нужно заполнить все поля (:");
                 alert.show();
             } else {
-                User user = UserUtils.loginUser(email, password);
+                User user = UserUtils.login(email, password);
                 if (user == null) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setContentText("Неверная почта или пароль :0");
                     alert.show();
                 } else {
+                    State.user = user;
                     CommonUtils.changeScene(btn_login,"components/templates/navbar.fxml");
                 }
             }
