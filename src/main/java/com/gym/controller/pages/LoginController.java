@@ -1,7 +1,6 @@
 package com.gym.controller.pages;
 
 import com.gym.State;
-import com.gym.controller.templates.NavbarController;
 import com.gym.entity.User;
 import com.gym.utils.CommonUtils;
 import com.gym.utils.UserUtils;
@@ -23,7 +22,6 @@ public class LoginController implements Initializable {
     private Button btn_login;
     @FXML
     private Button btn_link_signup;
-
     @FXML
     private TextField tf_email;
     @FXML
