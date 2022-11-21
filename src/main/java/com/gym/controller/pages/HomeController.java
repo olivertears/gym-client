@@ -17,7 +17,7 @@ public class HomeController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btn_test_modal.setOnMouseClicked(event -> {
             try {
-                CommonUtils.showModal("components/modal/workout-modal.fxml");
+                CommonUtils.showModal("components/modal/coach-modal.fxml");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

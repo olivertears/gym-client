@@ -13,13 +13,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../../styles/modal.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gym.controller.modal.WorkoutModalController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../../styles/modal.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gym.controller.modal.SubscriptionModalController">
    <children>
       <DialogPane layoutX="100.0" layoutY="60.0" prefHeight="210.0" prefWidth="400.0" style="-fx-background-color: FFFAAA;">
          <header>
             <Pane prefHeight="30.0" prefWidth="300.0" style="-fx-background-color: FFDD55;">
                <children>
-                  <Label layoutX="14.0" layoutY="5.0" text="ТРЕНИРОВКА">
+                  <Label layoutX="14.0" layoutY="5.0" text="АБОНЕМЕНТ">
                      <font>
                         <Font name="Arial Black" size="14.0" />
                      </font>
@@ -38,14 +38,14 @@
          <content>
             <AnchorPane prefHeight="179.0" prefWidth="300.0" style="-fx-background-color: FFFAAA;">
                <children>
-                  <Label alignment="CENTER_RIGHT" layoutX="20.0" layoutY="19.0" prefHeight="30.0" prefWidth="117.0" text="Тренер">
+                  <Label alignment="CENTER_RIGHT" layoutX="48.0" layoutY="20.0" prefHeight="30.0" prefWidth="130.0" text="Подписка">
                      <font>
                         <Font name="Arial Black" size="20.0" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="cb_coach" layoutX="148.0" layoutY="19.0" prefHeight="30.0" prefWidth="200.0" />
-                  <DatePicker fx:id="dp_date" editable="false" layoutX="148.0" layoutY="69.0" prefHeight="30.0" prefWidth="200.0" />
-                  <Label fx:id="lbl_price" alignment="CENTER_RIGHT" layoutX="148.0" layoutY="159.0" prefHeight="30.0" prefWidth="200.0" text="\$30.00" textAlignment="RIGHT">
+                  <ChoiceBox fx:id="cb_type" layoutX="188.0" layoutY="20.0" prefHeight="30.0" prefWidth="200.0" />
+                  <DatePicker fx:id="dp_start" editable="false" layoutX="188.0" layoutY="70.0" prefHeight="30.0" prefWidth="200.0" />
+                  <Label fx:id="lbl_price" alignment="CENTER_RIGHT" layoutX="188.0" layoutY="160.0" prefHeight="30.0" prefWidth="200.0" text="\$30.00" textAlignment="RIGHT">
                      <font>
                         <Font name="Arial Black" size="20.0" />
                      </font>
@@ -55,13 +55,13 @@
                         <Font name="Arial Black" size="12.0" />
                      </font>
                   </Button>
-                  <ChoiceBox fx:id="cb_time" layoutX="148.0" layoutY="119.0" prefHeight="30.0" prefWidth="200.0" />
-                  <Label alignment="CENTER_RIGHT" layoutX="20.0" layoutY="69.0" prefHeight="30.0" prefWidth="117.0" text="Дата">
+                  <ChoiceBox fx:id="cb_duration" layoutX="188.0" layoutY="120.0" prefHeight="30.0" prefWidth="200.0" />
+                  <Label alignment="CENTER_RIGHT" layoutX="60.0" layoutY="70.0" prefHeight="30.0" prefWidth="117.0" text="Начало">
                      <font>
                         <Font name="Arial Black" size="20.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" layoutX="20.0" layoutY="119.0" prefHeight="30.0" prefWidth="117.0" text="Время">
+                  <Label alignment="CENTER_RIGHT" layoutX="13.0" layoutY="120.0" prefHeight="30.0" prefWidth="165.0" text="Длительность">
                      <font>
                         <Font name="Arial Black" size="20.0" />
                      </font>
