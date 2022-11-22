@@ -27,11 +27,18 @@ public class NavbarController implements Initializable {
     @FXML
     private VBox wrap_navbar;
 
+    @FXML
+    private Button btn_budget;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         iv_exit.setOnMouseClicked(event -> System.exit(0));
 
         btn_logout.setOnMouseClicked(event -> CommonUtils.changeScene(btn_logout, "components/pages/login.fxml"));
+
+        if (!State.user.getRole().equals("ADMIN")) {
+            btn_budget.setVisible(false);
+        }
 
         try {
             setUser();

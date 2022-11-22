@@ -4,6 +4,7 @@ import com.gym.Application;
 import com.gym.Connection;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -64,5 +65,14 @@ public class CommonUtils {
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((primScreenBounds.getWidth() - scene.getWidth()) / 2);
         stage.setY((primScreenBounds.getHeight() - scene.getHeight()) / 2);
+    }
+
+    public static Object getController(Node node) {
+        Object controller = null;
+        do {
+            controller = node.getProperties().get("controller");
+            node = node.getParent();
+        } while (controller == null && node != null);
+        return controller;
     }
 }

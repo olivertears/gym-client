@@ -16,4 +16,6 @@ module com.gym {
     opens com.gym.controller.pages to javafx.fxml;
     exports com.gym.controller.modal;
     opens com.gym.controller.modal to javafx.fxml;
+    exports com.gym.controller.entity;
+    opens com.gym.controller.entity to javafx.fxml;
 }

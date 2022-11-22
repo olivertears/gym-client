@@ -49,7 +49,7 @@ public class UserUtils {
         return (User) connection.readObject();
     }
 
-    public static List<User> getUsers (int id) {
+    public static List<User> getUsers () {
         connection.writeObject(Action.GET_USERS);
         return (List<User>) connection.readObject();
     }

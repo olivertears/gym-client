@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox prefHeight="50.0" prefWidth="560.0" style="-fx-background-color: FFFF66; -fx-border-radius: 10;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gym.controller.entity.UserEntityController">
+   <userData>
+      <fx:reference source="controller" />
+   </userData>
+   <properties>
+      <controller><fx:reference source="controller" /></controller>
+   </properties>
+   <children>
+      <AnchorPane prefHeight="50.0" prefWidth="120.0">
+         <children>
+            <Label fx:id="lbl_name" layoutY="10.0" prefHeight="30.0" prefWidth="120.0" text="Vitalya">
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="50.0" prefWidth="120.0">
+         <children>
+            <Label fx:id="lbl_surname" layoutY="10.0" prefHeight="30.0" prefWidth="120.0" text="Admin">
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="50.0" prefWidth="120.0">
+         <children>
+            <Label fx:id="lbl_email" layoutY="10.0" prefHeight="30.0" prefWidth="160.0" text="admin@gmail.com">
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="50.0" prefWidth="223.0">
+         <children>
+            <ChoiceBox fx:id="cb_role" layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="140.0">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+            </ChoiceBox>
+         </children>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+      </AnchorPane>
+   </children>
+</HBox>
