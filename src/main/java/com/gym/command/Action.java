@@ -9,6 +9,8 @@ public enum Action {
         DELETE_USER,
 
         CREATE_SUBSCRIPTION,
+        UPDATE_SUBSCRIPTION_TO_PREMIUM,
+        DELETE_SUBSCRIPTION,
         GET_USER_SUBSCRIPTION,
 
         CREATE_WORKOUT,

@@ -10,25 +10,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.stage.*;
 
+import java.beans.EventHandler;
 import java.io.IOException;
-import java.net.Socket;
 import java.util.Objects;
+import java.util.function.Function;
 
 public class CommonUtils {
-    static Connection connection;
-
-    static {
-        try {
-            connection = new Connection(new Socket("127.0.0.1", 8000));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
     public static void changeScene(Button button, String fxmlFile) {
         Stage stage = (Stage) button.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(Application.class.getResource(fxmlFile));
@@ -67,10 +56,10 @@ public class CommonUtils {
         stage.setY((primScreenBounds.getHeight() - scene.getHeight()) / 2);
     }
 
-    public static Object getController(Node node) {
+    public static Object getController(Node node, String key) {
         Object controller = null;
         do {
-            controller = node.getProperties().get("controller");
+            controller = node.getProperties().get(key);
             node = node.getParent();
         } while (controller == null && node != null);
         return controller;

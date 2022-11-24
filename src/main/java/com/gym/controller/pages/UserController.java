@@ -44,7 +44,7 @@ public class UserController implements Initializable {
         btn_save.setOnMouseClicked(event -> {
             ObservableList<Node> usersEntities = wrapper_users.getChildren();
             for (Node usersEntity : usersEntities) {
-                UserEntityController userEntityController = (UserEntityController) CommonUtils.getController(usersEntity);
+                UserEntityController userEntityController = (UserEntityController) CommonUtils.getController(usersEntity, "controller");
                 User user = userEntityController.getData();
                 UserUtils.updateUser(user);
             }
