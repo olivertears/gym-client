@@ -8,12 +8,6 @@
 <?import javafx.scene.text.Font?>
 
 <VBox prefHeight="320.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gym.controller.pages.SubscriptionController">
-   <userData>
-      <fx:reference source="controller" />
-   </userData>
-   <properties>
-      <controller><fx:reference source="controller" /></controller>
-   </properties>
    <children>
       <AnchorPane prefHeight="50.0" prefWidth="450.0">
          <children>
@@ -31,7 +25,7 @@
                   <Font name="Arial Black" size="12.0" />
                </font>
             </Button>
-            <Label layoutX="95.0" layoutY="69.0" text="У вас отсутствуют абонементы :(">
+            <Label fx:id="lbl_text" layoutX="95.0" layoutY="69.0" text="У вас отсутствуют абонементы :(">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>

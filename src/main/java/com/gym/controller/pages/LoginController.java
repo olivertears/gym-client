@@ -31,6 +31,9 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         iv_exit.setOnMouseClicked(event -> System.exit(0));
 
+        tf_email.setText("admin@gmail.com");
+        pf_password.setText("admin");
+
         btn_login.setOnAction(event -> {
             String email = tf_email.getText().trim();
             String password = pf_password.getText();

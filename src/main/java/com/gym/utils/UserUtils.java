@@ -54,6 +54,11 @@ public class UserUtils {
         return (List<User>) connection.readObject();
     }
 
+    public static List<User> getCoaches () {
+        connection.writeObject(Action.GET_COACHES);
+        return (List<User>) connection.readObject();
+    }
+
     public static boolean updateUser (User user) {
         connection.writeObject(Action.UPDATE_USER);
         connection.writeObject(user);

@@ -5,6 +5,7 @@ public enum Action {
         LOGIN,
         GET_USER_BY_ID,
         GET_USERS,
+        GET_COACHES,
         UPDATE_USER,
         DELETE_USER,
 

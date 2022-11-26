@@ -1,32 +1,25 @@
 package com.gym.controller.modal;
 
-import com.gym.Application;
 import com.gym.State;
-import com.gym.controller.entity.SubscriptionEntityController;
-import com.gym.controller.pages.SubscriptionController;
+import com.gym.controller.IControllerWithProperty;
 import com.gym.entity.Subscription;
-import com.gym.utils.CommonUtils;
 import com.gym.utils.SubscriptionUtils;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 
-public class SubscriptionModalController implements Initializable {
+public class SubscriptionModalController implements Initializable, IControllerWithProperty {
+    private static final ObjectProperty<Object> selectedProperty = new SimpleObjectProperty();
     @FXML
     private ImageView iv_exit;
     @FXML
@@ -45,23 +38,9 @@ public class SubscriptionModalController implements Initializable {
     private double priceValues[] = {30.00, 85.00, 225.00, 390.00, 660.00};
     private LocalDate today = LocalDate.now();
 
-    public void setData() {
-        cb_type.setItems(FXCollections.observableArrayList(typeValues));
-        cb_type.setValue(typeValues[0]);
-        dp_start.setValue(today);
-        cb_duration.setItems(FXCollections.observableArrayList(durationValues));
-        cb_duration.setValue(durationValues[0]);
-        lbl_price.setText("$" + priceValues[0] + "0");
-    }
-
-    public Subscription getData() {
-        Subscription subscription = new Subscription();
-        subscription.setUserId(State.user.getId());
-        subscription.setType((String) cb_type.getValue());
-        subscription.setPrice(getPrice());
-        subscription.setStart(dp_start.getValue());
-        subscription.setEnd(getEndDate());
-        return subscription;
+    @Override
+    public ObjectProperty<Object> selectedProperty() {
+        return selectedProperty;
     }
 
     @Override
@@ -85,7 +64,27 @@ public class SubscriptionModalController implements Initializable {
         btn_confirm.setOnMouseClicked(event -> {
             SubscriptionUtils.createSubscription(getData());
             ((Stage) btn_confirm.getScene().getWindow()).close();
+            selectedProperty.set(new Object());
         });
+    }
+
+    public void setData() {
+        cb_type.setItems(FXCollections.observableArrayList(typeValues));
+        cb_type.setValue(typeValues[0]);
+        dp_start.setValue(today);
+        cb_duration.setItems(FXCollections.observableArrayList(durationValues));
+        cb_duration.setValue(durationValues[0]);
+        lbl_price.setText("$" + priceValues[0] + "0");
+    }
+
+    public Subscription getData() {
+        Subscription subscription = new Subscription();
+        subscription.setUserId(State.user.getId());
+        subscription.setType((String) cb_type.getValue());
+        subscription.setPrice(getPrice());
+        subscription.setStart(dp_start.getValue());
+        subscription.setEnd(getEndDate());
+        return subscription;
     }
 
     private double getPrice() {

@@ -61,7 +61,7 @@ public class NavbarController implements Initializable {
     }
 
     public void workout () throws IOException {
-        CommonUtils.changePage(wrap_navbar, "components/pages/workout.fxml");
+        CommonUtils.changePage(wrap_navbar, "components/templates/workout.fxml");
     }
 
     public void budget () throws IOException {
