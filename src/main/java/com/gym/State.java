@@ -11,6 +11,7 @@ public class State {
     public static PropertyChangeSupport refresh = new PropertyChangeSupport(1);
 
     public static User user;
+    public static List<User> users;
     public static Subscription subscription;
 
     public static List<User> coaches;

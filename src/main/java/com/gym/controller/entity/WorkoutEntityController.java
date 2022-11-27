@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
@@ -71,7 +72,7 @@ public class WorkoutEntityController implements Initializable {
         this.price = workout.getPrice();
         lbl_date.setText(String.valueOf(workout.getDate()));
         lbl_time.setText(workout.getTime());
-        lbl_price.setText("$" + workout.getPrice());
+        lbl_price.setText("$" + new DecimalFormat("#0.00").format(workout.getPrice()).replace(',', '.'));
         if (State.user.getRole().equals("COACH")) {
             lbl_user.setText("Клиент:");
             lbl_user_value.setText(workout.getClient());

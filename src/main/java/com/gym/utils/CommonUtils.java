@@ -1,6 +1,7 @@
 package com.gym.utils;
 
 import com.gym.Application;
+import com.gym.controller.modal.AlertModalController;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
@@ -44,6 +45,27 @@ public class CommonUtils {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.initStyle(StageStyle.TRANSPARENT);
         scene.setFill(Color.TRANSPARENT);
+
+        stage.setScene(scene);
+        stage.show();
+
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - scene.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - scene.getHeight()) / 2);
+    }
+
+    public static void showAlert(String text) throws IOException {
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("components/modal/alert-modal.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        scene.setFill(Color.TRANSPARENT);
+
+        AlertModalController alertModalController = fxmlLoader.getController();
+        alertModalController.setData(text);
 
         stage.setScene(scene);
         stage.show();

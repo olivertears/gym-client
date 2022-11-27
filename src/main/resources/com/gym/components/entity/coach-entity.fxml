@@ -50,9 +50,9 @@
                   <Insets left="5.0" />
                </padding>
             </Label>
-            <Pane layoutX="339.6000061035156" layoutY="10.0" styleClass="btn" stylesheets="@../../styles/btn.css" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <Pane fx:id="pane_order_workout" layoutX="339.6000061035156" layoutY="10.0" styleClass="btn" stylesheets="@../../styles/btn.css" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                <children>
-                  <ImageView fx:id="iv_order_workout" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../img/workout.png" />
                      </image>

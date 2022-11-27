@@ -12,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -46,19 +47,25 @@ public class SignupController implements Initializable {
             Pattern pattern = Pattern.compile("^([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$");
 
             if (name.isEmpty() || surname.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Чтобы зарегистрироваться нужно заполнить все поля (:");
-                alert.show();
+                try {
+                    CommonUtils.showAlert("Чтобы зарегистрироваться нужно заполнить все поля (:");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             } else if (!pattern.matcher(email).find()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Неверный формат почты :0");
-                alert.show();
+                try {
+                    CommonUtils.showAlert("Неверный формат почты :0");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             } else {
                 User user = UserUtils.signup(name, surname, email, password);
                 if (user == null) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("Пользователь с такой почтой уже существует :0");
-                    alert.show();
+                    try {
+                        CommonUtils.showAlert("Пользователь с такой почтой уже существует :0");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 } else {
                     State.user = user;
                     CommonUtils.changeScene(btn_signup,"components/templates/navbar.fxml");

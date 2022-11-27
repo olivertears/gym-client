@@ -1,6 +1,7 @@
 package com.gym.controller.entity;
 
 import com.gym.State;
+import com.gym.dto.UserRoleDto;
 import com.gym.entity.User;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -30,6 +31,17 @@ public class UserEntityController implements Initializable {
         if (!State.user.getRole().equals("ADMIN")) {
             cb_role.setDisable(true);
         }
+
+        cb_role.setOnAction(event -> {
+            User userToChange = State.users.stream()
+                                    .filter(user -> user.getId() == this.id)
+                                    .findFirst()
+                                    .orElse(null);
+            int index = State.users.indexOf(userToChange);
+            userToChange.setRole((String) cb_role.getValue());
+
+            State.users.set(index, userToChange);
+        });
     }
 
     public void setData(User user) {
@@ -41,13 +53,10 @@ public class UserEntityController implements Initializable {
         cb_role.setValue(user.getRole());
     }
 
-    public User getData() {
-        User user = new User();
-        user.setId(this.id);
-        user.setName(lbl_name.getText());
-        user.setSurname(lbl_surname.getText());
-        user.setEmail(lbl_email.getText());
-        user.setRole((String) cb_role.getValue());
-        return user;
+    public UserRoleDto getData() {
+        UserRoleDto userRoleDto = new UserRoleDto();
+        userRoleDto.setId(this.id);
+        userRoleDto.setRole((String) cb_role.getValue());
+        return userRoleDto;
     }
 }

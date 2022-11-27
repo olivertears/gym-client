@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -114,7 +115,7 @@ public class WorkoutModalController implements Initializable {
             btn_confirm.setDisable(true);
         }
 
-        lbl_price.setText("$" + State.coach.getPrice());
+        lbl_price.setText("$" + new DecimalFormat("#0.00").format(State.coach.getPrice()).replace(',', '.'));
     }
 
     public Workout getData() {

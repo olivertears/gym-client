@@ -3,6 +3,7 @@ package com.gym.controller.pages;
 import com.gym.Application;
 import com.gym.State;
 import com.gym.controller.entity.UserEntityController;
+import com.gym.dto.UserRoleDto;
 import com.gym.entity.User;
 import com.gym.utils.CommonUtils;
 import com.gym.utils.UserUtils;
@@ -30,17 +31,10 @@ public class UserController implements Initializable {
     @FXML
     private VBox wrapper_users;
 
-    private List<User> users;
-
-//    Customer james = customers.stream()
-//            .filter(customer -> "James".equals(customer.getName()))
-//            .findAny()
-//            .orElse(null);
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        users = UserUtils.getUsers();
-        setUsers(users);
+        State.users = UserUtils.getUsers();
+        setUsers(State.users);
 
         if (!State.user.getRole().equals("ADMIN")) {
             btn_save.setVisible(false);
@@ -50,14 +44,14 @@ public class UserController implements Initializable {
             ObservableList<Node> usersEntities = wrapper_users.getChildren();
             for (Node usersEntity : usersEntities) {
                 UserEntityController userEntityController = (UserEntityController) CommonUtils.getController(usersEntity, "controller");
-                User user = userEntityController.getData();
-                UserUtils.updateUser(user);
+                UserRoleDto userRoleDto = userEntityController.getData();
+                UserUtils.updateUserRole(userRoleDto);
             }
         });
 
         tf_search.setOnKeyTyped(event -> {
             List<User> filteredUsers = new ArrayList<>();
-            for (User user: users) {
+            for (User user: State.users) {
                 if ((user.getName() + " " + user.getSurname()).toLowerCase().startsWith(tf_search.getText().toLowerCase()) ||
                         (user.getSurname() + " " + user.getName()).toLowerCase().startsWith(tf_search.getText().toLowerCase())) {
                     filteredUsers.add(user);

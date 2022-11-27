@@ -12,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -38,15 +39,19 @@ public class LoginController implements Initializable {
             String email = tf_email.getText().trim();
             String password = pf_password.getText();
             if (email.isEmpty() || password.isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Чтобы войти нужно заполнить все поля (:");
-                alert.show();
+                try {
+                    CommonUtils.showAlert("Чтобы войти нужно заполнить все поля (:");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             } else {
                 User user = UserUtils.login(email, password);
                 if (user == null) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("Неверная почта или пароль :0");
-                    alert.show();
+                    try {
+                        CommonUtils.showAlert("Неверная почта или пароль :0");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 } else {
                     State.user = user;
                     CommonUtils.changeScene(btn_login,"components/templates/navbar.fxml");

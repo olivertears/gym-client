@@ -4,6 +4,7 @@ import com.gym.Connection;
 import com.gym.command.Action;
 import com.gym.dto.LoginDto;
 import com.gym.dto.SignupDto;
+import com.gym.dto.UserRoleDto;
 import com.gym.entity.User;
 
 import java.io.IOException;
@@ -62,6 +63,12 @@ public class UserUtils {
     public static boolean updateUser (User user) {
         connection.writeObject(Action.UPDATE_USER);
         connection.writeObject(user);
+        return (boolean) connection.readObject();
+    }
+
+    public static boolean updateUserRole (UserRoleDto userRoleDto) {
+        connection.writeObject(Action.UPDATE_USER_ROLE);
+        connection.writeObject(userRoleDto);
         return (boolean) connection.readObject();
     }
 

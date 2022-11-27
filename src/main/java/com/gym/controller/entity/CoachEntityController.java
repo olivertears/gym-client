@@ -10,14 +10,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 public class CoachEntityController implements Initializable {
     @FXML
-    private ImageView iv_order_workout;
+    private Pane pane_order_workout;
     @FXML
     private Label lbl_coach;
     @FXML
@@ -27,15 +29,16 @@ public class CoachEntityController implements Initializable {
 
     private User coach;
 
-    private int id;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        iv_order_workout.setOnMouseClicked(event -> {
+        pane_order_workout.setOnMouseClicked(event -> {
             if (State.subscription == null) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Прежде чем записаться на тренировку нужно приобрести абонемент (:");
-                alert.show();
+                try {
+                    CommonUtils.showAlert("Прежде чем записаться на тренировку нужно приобрести абонемент (:");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             } else {
                 try {
                     State.coach = this.coach;
@@ -49,14 +52,9 @@ public class CoachEntityController implements Initializable {
 
     public void setData(User user) {
         coach = user;
-        id = user.getId();
         lbl_coach.setText(user.getName() + " " + user.getSurname());
         lbl_email.setText(user.getEmail());
-        lbl_price.setText("$" + user.getPrice());
-        iv_order_workout.setVisible(!State.user.getRole().equals("COACH"));
-    }
-
-    public int getCoachId() {
-        return id;
+        lbl_price.setText("$" +  new DecimalFormat("#0.00").format(user.getPrice()).replace(',', '.'));
+        pane_order_workout.setVisible(!State.user.getRole().equals("COACH"));
     }
 }
