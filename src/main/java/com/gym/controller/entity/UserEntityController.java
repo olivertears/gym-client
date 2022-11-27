@@ -25,6 +25,13 @@ public class UserEntityController implements Initializable {
 
     private String roleValues[] = { "CLIENT", "COACH" };
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (!State.user.getRole().equals("ADMIN")) {
+            cb_role.setDisable(true);
+        }
+    }
+
     public void setData(User user) {
         this.id = user.getId();
         lbl_name.setText(user.getName());
@@ -42,12 +49,5 @@ public class UserEntityController implements Initializable {
         user.setEmail(lbl_email.getText());
         user.setRole((String) cb_role.getValue());
         return user;
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (!State.user.getRole().equals("ADMIN")) {
-            cb_role.setDisable(true);
-        }
     }
 }

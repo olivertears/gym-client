@@ -2,12 +2,10 @@ package com.gym.controller.pages;
 
 import com.gym.Application;
 import com.gym.State;
-import com.gym.controller.IControllerWithProperty;
 import com.gym.controller.entity.SubscriptionEntityController;
 import com.gym.entity.Subscription;
 import com.gym.utils.CommonUtils;
 import com.gym.utils.SubscriptionUtils;
-import javafx.beans.property.ObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,9 +18,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SubscriptionController implements Initializable {
-    private ObjectProperty<Object> modalProperty;
-    private ObjectProperty<Object> entityProperty;
-
     @FXML
     private Button btn_buy;
     @FXML
@@ -35,26 +30,23 @@ public class SubscriptionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         subscription = SubscriptionUtils.getUserSubscription(State.user.getId());
+        State.subscription = subscription;
         if (subscription != null) {
             setSubscription();
         }
 
         btn_buy.setOnMouseClicked(event -> {
             try {
-                IControllerWithProperty controller = CommonUtils.showModal("components/modal/subscription-modal.fxml");
-                modalProperty = controller.selectedProperty();
-                btn_buy.cacheProperty().bind(modalProperty.isNotNull());
+                CommonUtils.showModal("components/modal/subscription-modal.fxml");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
-        
-        btn_buy.cacheProperty().addListener(event -> {
-            initController();
-        });
 
-        wrap_subscription.cacheProperty().addListener(event -> {
-            initController();
+        State.refresh.addPropertyChangeListener(event -> {
+            if (event.getPropertyName().equals("subscription"))   {
+                initController();
+            }
         });
     }
 
@@ -67,9 +59,6 @@ public class SubscriptionController implements Initializable {
             SubscriptionEntityController subscriptionEntityController = fxmlLoader.getController();
             subscriptionEntityController.setData(subscription);
             wrap_subscription.getChildren().add(subscriptionEntity);
-
-            entityProperty = subscriptionEntityController.selectedProperty();
-            wrap_subscription.cacheProperty().bind(entityProperty.isNotNull());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -77,6 +66,7 @@ public class SubscriptionController implements Initializable {
 
     public void initController() {
         subscription = SubscriptionUtils.getUserSubscription(State.user.getId());
+        State.subscription = subscription;
         if (subscription != null) {
             setSubscription();
         } else {

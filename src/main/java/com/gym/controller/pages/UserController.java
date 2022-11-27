@@ -32,6 +32,11 @@ public class UserController implements Initializable {
 
     private List<User> users;
 
+//    Customer james = customers.stream()
+//            .filter(customer -> "James".equals(customer.getName()))
+//            .findAny()
+//            .orElse(null);
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         users = UserUtils.getUsers();

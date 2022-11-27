@@ -1,8 +1,6 @@
 package com.gym.utils;
 
 import com.gym.Application;
-import com.gym.Connection;
-import com.gym.controller.IControllerWithProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
@@ -13,10 +11,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.*;
 
-import java.beans.EventHandler;
 import java.io.IOException;
 import java.util.Objects;
-import java.util.function.Function;
 
 public class CommonUtils {
     public static void changeScene(Button button, String fxmlFile) {
@@ -39,7 +35,7 @@ public class CommonUtils {
         wrapper.getChildren().setAll(fxml);
     }
 
-    public static IControllerWithProperty showModal(String fxmlFile) throws IOException {
+    public static void showModal(String fxmlFile) throws IOException {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
 
@@ -55,8 +51,6 @@ public class CommonUtils {
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((primScreenBounds.getWidth() - scene.getWidth()) / 2);
         stage.setY((primScreenBounds.getHeight() - scene.getHeight()) / 2);
-
-        return fxmlLoader.getController();
     }
 
     public static Object getController(Node node, String key) {

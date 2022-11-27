@@ -1,11 +1,8 @@
 package com.gym.controller.entity;
 
 import com.gym.State;
-import com.gym.controller.IControllerWithProperty;
 import com.gym.entity.Subscription;
 import com.gym.utils.SubscriptionUtils;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -15,8 +12,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-public class SubscriptionEntityController implements Initializable, IControllerWithProperty {
-    private static final ObjectProperty<Object> selectedProperty = new SimpleObjectProperty();
+public class SubscriptionEntityController implements Initializable {
     @FXML
     private Label lbl_client;
     @FXML
@@ -34,11 +30,6 @@ public class SubscriptionEntityController implements Initializable, IControllerW
     private int id;
 
     @Override
-    public ObjectProperty<Object> selectedProperty() {
-        return selectedProperty;
-    }
-
-    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btn_update.setOnMouseClicked(event -> {
             SubscriptionUtils.updateSubscriptionToPremium(id);
@@ -49,7 +40,7 @@ public class SubscriptionEntityController implements Initializable, IControllerW
 
         btn_delete.setOnMouseClicked(event -> {
             SubscriptionUtils.deleteSubscription(id);
-            selectedProperty.set(new Object());
+            State.refresh.firePropertyChange("subscription", 1, 2);
         });
     }
 
@@ -61,8 +52,8 @@ public class SubscriptionEntityController implements Initializable, IControllerW
         lbl_client.setText(State.user.getName().toUpperCase() + " " + State.user.getSurname().toUpperCase());
         lbl_type.setText(subscription.getType());
         lbl_status.setVisible(isActive);
-        lbl_date.setText(subscription.getStart() + "-" + subscription.getEnd());
+        lbl_date.setText(subscription.getStart() + " — " + subscription.getEnd());
         btn_delete.setDisable(isActive);
-        btn_update.setDisable(subscription.getType().equals("PREMIUM"));
+        btn_update.setDisable(subscription.getType().equals("PREMIUM") || State.user.getRole().equals("COACH"));
     }
 }

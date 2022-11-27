@@ -1,9 +1,11 @@
 package com.gym.controller.pages;
 
 import com.gym.Application;
+import com.gym.State;
 import com.gym.controller.entity.CoachEntityController;
 import com.gym.controller.entity.UserEntityController;
 import com.gym.entity.User;
+import com.gym.utils.SubscriptionUtils;
 import com.gym.utils.UserUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,17 +23,16 @@ public class CoachesController implements Initializable {
     @FXML
     private VBox wrap_coaches;
 
-    private List<User> coaches;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        coaches = UserUtils.getCoaches();
-        setCoaches(coaches);
+        State.subscription = SubscriptionUtils.getUserSubscription(State.user.getId());
+        State.coaches = UserUtils.getCoaches();
+        setCoaches();
     }
 
-    private void setCoaches(List<User> coaches) {
+    private void setCoaches() {
         wrap_coaches.getChildren().clear();
-        for (User coach : coaches) {
+        for (User coach : State.coaches) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(Application.class.getResource("components/entity/coach-entity.fxml"));
             try {

@@ -1,11 +1,8 @@
 package com.gym.controller.modal;
 
 import com.gym.State;
-import com.gym.controller.IControllerWithProperty;
 import com.gym.entity.Subscription;
 import com.gym.utils.SubscriptionUtils;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,8 +15,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-public class SubscriptionModalController implements Initializable, IControllerWithProperty {
-    private static final ObjectProperty<Object> selectedProperty = new SimpleObjectProperty();
+public class SubscriptionModalController implements Initializable {
     @FXML
     private ImageView iv_exit;
     @FXML
@@ -34,14 +30,9 @@ public class SubscriptionModalController implements Initializable, IControllerWi
     private Button btn_confirm;
 
     private String typeValues[] = { "STANDARD", "PREMIUM" };
-    private String durationValues[] = { "1 WEEK", "1 MONTH", "3 MONTHs", "6 MONTHS", "1 YEAR"};
+    private String durationValues[] = { "1 WEEK", "1 MONTH", "3 MONTHS", "6 MONTHS", "1 YEAR"};
     private double priceValues[] = {30.00, 85.00, 225.00, 390.00, 660.00};
     private LocalDate today = LocalDate.now();
-
-    @Override
-    public ObjectProperty<Object> selectedProperty() {
-        return selectedProperty;
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -52,6 +43,10 @@ public class SubscriptionModalController implements Initializable, IControllerWi
                         setDisable(item.isBefore(today));
                     }}
         );
+
+        if (State.user.getRole().equals("COACH")) {
+            typeValues = new String[]{"STANDARD"};
+        }
 
         setData();
 
@@ -64,7 +59,7 @@ public class SubscriptionModalController implements Initializable, IControllerWi
         btn_confirm.setOnMouseClicked(event -> {
             SubscriptionUtils.createSubscription(getData());
             ((Stage) btn_confirm.getScene().getWindow()).close();
-            selectedProperty.set(new Object());
+            State.refresh.firePropertyChange("subscription", 1, 2);
         });
     }
 
