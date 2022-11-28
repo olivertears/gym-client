@@ -9,15 +9,14 @@
 
 <VBox prefHeight="320.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gym.controller.pages.SubscriptionController">
    <children>
-      <AnchorPane prefHeight="50.0" prefWidth="450.0">
-         <children>
-            <Label layoutX="14.0" layoutY="1.0" text="МОЙ АБОНЕМЕНТ">
-               <font>
-                  <Font name="Arial Black" size="32.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
+      <Label text="МОЙ АБОНЕМЕНТ">
+         <font>
+            <Font name="Arial Black" size="32.0" />
+         </font>
+         <padding>
+            <Insets left="15.0" />
+         </padding>
+      </Label>
       <AnchorPane fx:id="wrap_subscription" prefHeight="250.0" prefWidth="450.0">
          <children>
             <Button fx:id="btn_buy" layoutX="165.0" layoutY="109.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" styleClass="btn" stylesheets="@../../styles/btn.css" text="ПРИОБРЕСТИ">

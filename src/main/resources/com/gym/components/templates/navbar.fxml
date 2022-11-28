@@ -58,7 +58,7 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="150.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#home" prefHeight="40.0" prefWidth="150.0" styleClass="navBtn" text="ГЛАВНАЯ">
+                  <Button mnemonicParsing="false" onAction="#profile" prefHeight="40.0" prefWidth="150.0" styleClass="navBtn" text="ПРОФИЛЬ">
                      <font>
                         <Font name="Arial Black" size="12.0" />
                      </font>

@@ -4,6 +4,7 @@ import com.gym.Connection;
 import com.gym.command.Action;
 import com.gym.dto.LoginDto;
 import com.gym.dto.SignupDto;
+import com.gym.dto.UserDataDto;
 import com.gym.dto.UserRoleDto;
 import com.gym.entity.User;
 
@@ -60,9 +61,9 @@ public class UserUtils {
         return (List<User>) connection.readObject();
     }
 
-    public static boolean updateUser (User user) {
+    public static boolean updateUser (UserDataDto userDataDto) {
         connection.writeObject(Action.UPDATE_USER);
-        connection.writeObject(user);
+        connection.writeObject(userDataDto);
         return (boolean) connection.readObject();
     }
 

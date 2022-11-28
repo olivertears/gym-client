@@ -12,7 +12,7 @@
                 <Font name="Arial Black" size="32.0" />
             </font>
          <VBox.margin>
-            <Insets left="20.0" />
+            <Insets left="15.0" />
          </VBox.margin>
         </Label>
     </children>

@@ -48,6 +48,10 @@ public class WorkoutModalController implements Initializable {
         });
 
         cb_coach.setOnAction(event -> {
+            State.coach = State.coaches.stream()
+                    .filter(coach -> coach.getId() == cb_coach.getValue().getKey())
+                    .findAny()
+                    .orElse(null);
             setData();
         });
 
@@ -115,7 +119,9 @@ public class WorkoutModalController implements Initializable {
             btn_confirm.setDisable(true);
         }
 
-        lbl_price.setText("$" + new DecimalFormat("#0.00").format(State.coach.getPrice()).replace(',', '.'));
+        double workoutPrice = State.subscription.getType().equals("PREMIUM") ? State.coach.getPrice() * 0.8 : State.coach.getPrice();
+
+        lbl_price.setText("$" + new DecimalFormat("#0.00").format(workoutPrice).replace(',', '.'));
     }
 
     public Workout getData() {
@@ -125,7 +131,7 @@ public class WorkoutModalController implements Initializable {
         }
         workout.setClientId(State.user.getId());
         workout.setCoachId(cb_coach.getValue().getKey());
-        workout.setPrice(State.coach.getPrice());
+        workout.setPrice(State.subscription.getType().equals("PREMIUM") ? State.coach.getPrice() * 0.8 : State.coach.getPrice());
         workout.setDate(dp_date.getValue());
         workout.setTime(cb_time.getValue());
         return workout;

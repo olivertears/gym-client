@@ -42,18 +42,24 @@ public class NavbarController implements Initializable {
 
         try {
             setUser();
-            home();
+            profile();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        State.refresh.addPropertyChangeListener(event -> {
+            if (event.getPropertyName().equals("user"))   {
+                setUser();
+            }
+        });
     }
 
     public void setUser() {
         lbl_user.setText(State.user.getName() + " " + State.user.getSurname());
     }
 
-    public void home () throws IOException {
-        CommonUtils.changePage(wrap_navbar, "components/pages/home.fxml");
+    public void profile () throws IOException {
+        CommonUtils.changePage(wrap_navbar, "components/pages/profile.fxml");
     }
 
     public void subscription () throws IOException {
