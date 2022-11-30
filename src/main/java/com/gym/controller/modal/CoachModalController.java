@@ -3,6 +3,7 @@ package com.gym.controller.modal;
 import com.gym.State;
 import com.gym.dto.UserDataDto;
 import com.gym.entity.User;
+import com.gym.utils.CommonUtils;
 import com.gym.utils.UserUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,6 +13,7 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
@@ -41,10 +43,22 @@ public class CoachModalController implements Initializable {
                 return c;
         }));
 
+        tf_price.setOnKeyTyped(event -> {
+            btn_save.setDisable(tf_price.getText().equals(".") || tf_price.getText().equals(""));
+        });
+
         btn_save.setOnMouseClicked(event -> {
-            UserUtils.updateUser(getData());
-            ((Stage) btn_save.getScene().getWindow()).close();
-            State.refresh.firePropertyChange("user", 1, 2);
+            if (Double.parseDouble(tf_price.getText()) == 0.00) {
+                try {
+                    CommonUtils.showAlert("Каждый труд должен оплачиваться :D");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                UserUtils.updateUser(getData());
+                ((Stage) btn_save.getScene().getWindow()).close();
+                State.refresh.firePropertyChange("user", 1, 2);
+            }
         });
     }
 

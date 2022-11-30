@@ -23,6 +23,7 @@ public class UserEntityController implements Initializable {
     private ChoiceBox cb_role;
 
     private int id;
+    private Double price;
 
     private String roleValues[] = { "CLIENT", "COACH" };
 
@@ -46,6 +47,7 @@ public class UserEntityController implements Initializable {
 
     public void setData(User user) {
         this.id = user.getId();
+        this.price = user.getPrice();
         lbl_name.setText(user.getName());
         lbl_surname.setText(user.getSurname());
         lbl_email.setText(user.getEmail());
@@ -56,6 +58,7 @@ public class UserEntityController implements Initializable {
     public UserRoleDto getData() {
         UserRoleDto userRoleDto = new UserRoleDto();
         userRoleDto.setId(this.id);
+        userRoleDto.setPrice(this.price);
         userRoleDto.setRole((String) cb_role.getValue());
         return userRoleDto;
     }

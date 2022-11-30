@@ -33,5 +33,9 @@ public class OperationModalController implements Initializable {
             else
                 return c;
         }));
+
+        tf_price.setOnKeyTyped(event -> {
+            btn_create.setDisable(tf_price.getText().equals(".") || tf_price.getText().equals(""));
+        });
     }
 }

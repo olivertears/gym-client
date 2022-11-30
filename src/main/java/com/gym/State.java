@@ -1,5 +1,6 @@
 package com.gym;
 
+import com.gym.entity.Category;
 import com.gym.entity.Subscription;
 import com.gym.entity.User;
 import com.gym.entity.Workout;
@@ -18,4 +19,7 @@ public class State {
     public static User coach;
 
     public static Workout workout;
+
+    public static Category category;
+    public static List<Category> categories;
 }

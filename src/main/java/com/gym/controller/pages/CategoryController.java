@@ -1,11 +1,13 @@
 package com.gym.controller.pages;
 
 import com.gym.Application;
+import com.gym.State;
 import com.gym.controller.entity.CategoryEntityController;
 import com.gym.controller.entity.WorkoutEntityController;
 import com.gym.entity.Category;
 import com.gym.entity.Workout;
 import com.gym.utils.CategoryUtils;
+import com.gym.utils.CommonUtils;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,22 +30,42 @@ public class CategoryController implements Initializable {
     @FXML
     private VBox wrap_category;
     @FXML
-    private Pane wrap_header;
-    @FXML
     private ChoiceBox<String> cb_filter;
 
     private String filterValues[] = { "ALL", "INCOME", "EXPENSE" };
-    private List<Category> categories;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cb_filter.setItems(FXCollections.observableArrayList(filterValues));
         cb_filter.setValue(filterValues[0]);
 
-        categories = CategoryUtils.getCategoriesByType(cb_filter.getValue());
-        System.out.println(categories);
+        initController();
 
-        setCategories(categories);
+        State.refresh.addPropertyChangeListener(event -> {
+            if (event.getPropertyName().equals("category"))   {
+                initController();
+            }
+        });
+
+        cb_filter.setOnAction(event -> {
+            initController();
+        });
+
+        btn_add_category.setOnMouseClicked(event -> {
+            try {
+                CommonUtils.showModal("components/modal/category-modal.fxml");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        btn_default_categories.setOnMouseClicked(event -> {
+            try {
+                CommonUtils.showModal("components/modal/default-categories-modal.fxml");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     private void setCategories(List<Category> categories) {
@@ -60,5 +82,10 @@ public class CategoryController implements Initializable {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    private void initController() {
+        State.categories = CategoryUtils.getCategoriesByType(cb_filter.getValue());
+        setCategories(State.categories);
     }
 }
