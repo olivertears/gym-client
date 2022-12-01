@@ -74,10 +74,10 @@ public class CategoryController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(Application.class.getResource("components/entity/category-entity.fxml"));
             try {
-                AnchorPane workoutEntity = fxmlLoader.load();
+                AnchorPane categoryEntity = fxmlLoader.load();
                 CategoryEntityController categoryEntityController = fxmlLoader.getController();
                 categoryEntityController.setData(category);
-                wrap_category.getChildren().add(workoutEntity);
+                wrap_category.getChildren().add(categoryEntity);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

@@ -16,14 +16,14 @@ public class BudgetController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            operation();
+            transaction();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void operation () throws IOException {
-        CommonUtils.changePage(wrap_budget, "components/pages/operation.fxml");
+    public void transaction () throws IOException {
+        CommonUtils.changePage(wrap_budget, "components/pages/transaction.fxml");
     }
 
     public void category () throws IOException {

@@ -14,13 +14,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../../styles/modal.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gym.controller.modal.OperationModalController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../../styles/modal.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gym.controller.modal.TransactionModalController">
    <children>
       <DialogPane layoutX="100.0" layoutY="18.0" prefHeight="210.0" prefWidth="400.0" style="-fx-background-color: FFFAAA;">
          <header>
             <Pane prefHeight="30.0" prefWidth="300.0" style="-fx-background-color: FFDD55;">
                <children>
-                  <Label layoutX="14.0" layoutY="5.0" text="ОПЕРАЦИЯ">
+                  <Label layoutX="14.0" layoutY="5.0" text="ТРАНСАКЦИЯ">
                      <font>
                         <Font name="Arial Black" size="14.0" />
                      </font>
@@ -57,7 +57,7 @@
                      </font>
                   </Label>
                   <TextField fx:id="tf_price" layoutX="170.0" layoutY="121.0" prefHeight="30.0" prefWidth="200.0" />
-                  <TextArea fx:id="ta_description" layoutX="170.0" layoutY="171.0" prefHeight="90.0" prefWidth="200.0" />
+                  <TextArea fx:id="tf_description" layoutX="170.0" layoutY="171.0" prefHeight="90.0" prefWidth="200.0" />
                   <Label alignment="CENTER_RIGHT" layoutX="20.0" layoutY="171.0" prefHeight="30.0" prefWidth="142.0" text="Описание">
                      <font>
                         <Font name="Arial Black" size="20.0" />

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="290.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gym.controller.pages.TransactionController">
+   <children>
+      <AnchorPane prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: FFDD55;">
+         <children>
+            <DatePicker fx:id="dp_start" layoutX="33.0" layoutY="10.0" prefHeight="30.0" prefWidth="120.0" />
+            <DatePicker fx:id="dp_end" layoutX="179.0" layoutY="10.0" prefHeight="30.0" prefWidth="120.0" />
+            <Label layoutX="14.0" layoutY="17.0" text="от">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="158.0" layoutY="17.0" text="до">
+               <font>
+                  <Font name="Arial Black" size="12.0" />
+               </font>
+            </Label>
+            <Pane fx:id="btn_add_category" layoutX="396.0" layoutY="5.0" prefHeight="40.0" prefWidth="40.0" styleClass="navBtn" stylesheets="@../../styles/btn.css">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../img/plus.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
+         </children>
+      </AnchorPane>
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="240.0" prefWidth="450.0" style="-fx-background-color: FFFAAA;">
+        <content>
+            <VBox fx:id="wrap_transaction" prefHeight="237.0" prefWidth="448.0" style="-fx-background-color: FFFAAA;">
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding></VBox>
+        </content>
+      </ScrollPane>
+   </children>
+</VBox>

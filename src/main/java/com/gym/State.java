@@ -1,9 +1,6 @@
 package com.gym;
 
-import com.gym.entity.Category;
-import com.gym.entity.Subscription;
-import com.gym.entity.User;
-import com.gym.entity.Workout;
+import com.gym.entity.*;
 
 import java.beans.PropertyChangeSupport;
 import java.util.List;
@@ -22,4 +19,7 @@ public class State {
 
     public static Category category;
     public static List<Category> categories;
+
+    public static Transaction transaction;
+    public static List<Transaction> transactions;
 }

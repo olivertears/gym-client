@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class OperationModalController implements Initializable {
+public class TransactionModalController implements Initializable {
     @FXML
     private ImageView iv_exit;
     @FXML
@@ -19,7 +19,7 @@ public class OperationModalController implements Initializable {
     @FXML
     private TextField tf_price;
     @FXML
-    private TextArea ta_description;
+    private TextArea tf_description;
     @FXML
     private Button btn_create;
 

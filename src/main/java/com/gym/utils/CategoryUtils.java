@@ -4,7 +4,6 @@ import com.gym.Connection;
 import com.gym.command.Action;
 import com.gym.dto.DefaultCategoryDto;
 import com.gym.entity.Category;
-import com.gym.entity.Workout;
 
 import java.io.IOException;
 import java.net.Socket;
