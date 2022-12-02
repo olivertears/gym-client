@@ -24,7 +24,7 @@
          <children>
             <AnchorPane layoutX="14.0" layoutY="10.0" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: FFDD55; -fx-background-radius: 10;" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="10.0">
                <children>
-                  <Label fx:id="lbl_category" layoutY="14.0" prefHeight="27.0" prefWidth="300.0" text="CATEGORY">
+                  <Label fx:id="lbl_category" layoutY="23.0" prefHeight="27.0" prefWidth="300.0" text="CATEGORY">
                      <font>
                         <Font name="Arial Black" size="24.0" />
                      </font>
@@ -32,7 +32,7 @@
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lbl_price" layoutX="14.0" layoutY="58.0" prefHeight="27.0" prefWidth="207.0" text="EXPENSE">
+                  <Label fx:id="lbl_price" layoutX="14.0" layoutY="61.0" prefHeight="27.0" prefWidth="207.0" text="EXPENSE">
                      <font>
                         <Font name="Arial Black" size="18.0" />
                      </font>
@@ -52,6 +52,11 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Pane>
+                  <Label fx:id="lbl_date" alignment="CENTER_RIGHT" layoutX="157.0" layoutY="5.0" prefHeight="18.0" prefWidth="127.0" text="04.20.2021">
+                     <font>
+                        <Font name="Arial Black" size="12.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <Button fx:id="btn_delete" layoutX="328.0" layoutY="59.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" styleClass="btn" stylesheets="@../../styles/btn.css" text="УДАЛИТЬ">
@@ -70,7 +75,7 @@
          <children>
             <AnchorPane layoutX="14.0" prefHeight="120.0" prefWidth="300.0" style="-fx-background-color: FFDD55; -fx-background-radius: 10;">
                <children>
-                  <TextArea fx:id="ta_description" editable="false" layoutX="15.0" layoutY="10.0" prefHeight="100.0" prefWidth="270.0" promptText="Описание трансакции" />
+                  <TextArea fx:id="ta_description" editable="false" layoutX="15.0" layoutY="10.0" prefHeight="100.0" prefWidth="270.0" promptText="Описание трансакции" wrapText="true" />
                </children>
             </AnchorPane>
          </children>

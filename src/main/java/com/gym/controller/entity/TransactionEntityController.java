@@ -5,6 +5,7 @@ import com.gym.entity.Category;
 import com.gym.entity.Transaction;
 import com.gym.utils.CategoryUtils;
 import com.gym.utils.CommonUtils;
+import com.gym.utils.TransactionUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -18,6 +19,7 @@ import javafx.scene.transform.Rotate;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 public class TransactionEntityController implements Initializable {
@@ -37,6 +39,8 @@ public class TransactionEntityController implements Initializable {
     private VBox wrap_transaction_entity;
     @FXML
     private TextArea ta_description;
+    @FXML
+    private Label lbl_date;
 
     private Transaction transaction;
     private boolean isDescriptionOpen = false;
@@ -66,7 +70,7 @@ public class TransactionEntityController implements Initializable {
         });
 
         btn_delete.setOnMouseClicked(event -> {
-            CategoryUtils.deleteCategory(this.transaction.getId());
+            TransactionUtils.deleteTransaction(this.transaction.getId());
             State.refresh.firePropertyChange("transaction", 1, 2);
         });
     }
@@ -74,7 +78,12 @@ public class TransactionEntityController implements Initializable {
     public void setData(Transaction transaction) {
         this.transaction = transaction;
         lbl_category.setText(transaction.getCategoryName());
-        lbl_price.setText(String.valueOf(transaction.getPrice()));
+        if (transaction.getPrice() < 0) {
+            lbl_price.setText("-$" + new DecimalFormat("#0.00").format(-transaction.getPrice()).replace(',', '.'));
+        } else {
+            lbl_price.setText("$" + new DecimalFormat("#0.00").format(transaction.getPrice()).replace(',', '.'));
+        }
         ta_description.setText(transaction.getDescription());
+        lbl_date.setText(String.valueOf(transaction.getDate()));
     }
 }

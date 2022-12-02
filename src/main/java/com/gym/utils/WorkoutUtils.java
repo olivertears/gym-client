@@ -32,9 +32,9 @@ public class WorkoutUtils {
         return (boolean) connection.readObject();
     }
 
-    public static boolean setWorkoutDone(int id) {
+    public static boolean setWorkoutDone(Workout workout) {
         connection.writeObject(Action.SET_WORKOUT_DONE);
-        connection.writeObject(id);
+        connection.writeObject(workout);
         return (boolean) connection.readObject();
     }
 

@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class WorkoutEntityController implements Initializable {
@@ -37,6 +38,7 @@ public class WorkoutEntityController implements Initializable {
 
     private int id;
     private int coachId;
+    private int clientId;
     private double price;
 
     @Override
@@ -56,7 +58,7 @@ public class WorkoutEntityController implements Initializable {
         });
 
         btn_done_true.setOnMouseClicked(event -> {
-            WorkoutUtils.setWorkoutDone(this.id);
+            WorkoutUtils.setWorkoutDone(getData());
             State.refresh.firePropertyChange("workout", 1, 2);
         });
 
@@ -69,6 +71,7 @@ public class WorkoutEntityController implements Initializable {
     public void setData(Workout workout) {
         this.id = workout.getId();
         this.coachId = workout.getCoachId();
+        this.clientId = workout.getClientId();
         this.price = workout.getPrice();
         lbl_date.setText(String.valueOf(workout.getDate()));
         lbl_time.setText(workout.getTime());
@@ -81,15 +84,16 @@ public class WorkoutEntityController implements Initializable {
             lbl_user.setText("Тренер:");
             lbl_user_value.setText(workout.getCoach());
         }
-        btn_done_true.setVisible(workout.isDone());
-        btn_done_false.setVisible(workout.isDone());
-        btn_delete.setVisible(!workout.isDone());
+        boolean isFinishedWorkout = workout.getDate().isBefore(LocalDate.now()) || (workout.getDate().equals(LocalDate.now()) &&  LocalTime.now().getHour() >= Integer.parseInt(workout.getTime().substring(0,2)));
+        btn_done_true.setVisible(isFinishedWorkout);
+        btn_done_false.setVisible(isFinishedWorkout);
+        btn_delete.setVisible(!isFinishedWorkout);
     }
 
     public Workout getData() {
         Workout workout = new Workout();
         workout.setId(this.id);
-        workout.setClientId(State.user.getId());
+        workout.setClientId(this.clientId);
         workout.setCoachId(this.coachId);
         workout.setDate(LocalDate.parse(lbl_date.getText()));
         workout.setTime(lbl_time.getText());

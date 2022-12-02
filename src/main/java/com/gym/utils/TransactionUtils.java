@@ -3,6 +3,7 @@ package com.gym.utils;
 import com.gym.Connection;
 import com.gym.command.Action;
 import com.gym.dto.DefaultCategoryDto;
+import com.gym.dto.TransactionFilterDto;
 import com.gym.entity.Category;
 import com.gym.entity.Transaction;
 
@@ -39,8 +40,9 @@ public class TransactionUtils {
         return (boolean) connection.readObject();
     }
 
-    public static List<Transaction> getTransactions () {
+    public static List<Transaction> getTransactions (TransactionFilterDto transactionFilterDto) {
         connection.writeObject(Action.GET_TRANSACTION);
+        connection.writeObject(transactionFilterDto);
         return (List<Transaction>) connection.readObject();
     }
 }
