@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
+import java.awt.print.PrinterJob;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -27,7 +28,7 @@ import java.util.ResourceBundle;
 
 public class TransactionController implements Initializable {
     @FXML
-    private Pane btn_add_category;
+    private Pane btn_add_transaction;
     @FXML
     private DatePicker dp_end;
     @FXML
@@ -53,7 +54,7 @@ public class TransactionController implements Initializable {
             initController();
         });
 
-        btn_add_category.setOnMouseClicked(event -> {
+        btn_add_transaction.setOnMouseClicked(event -> {
             try {
                 CommonUtils.showModal("components/modal/transaction-modal.fxml");
             } catch (IOException e) {
